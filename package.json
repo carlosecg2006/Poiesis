@@ -1,0 +1,43 @@
+{
+  "name": "poiesis",
+  "productName": "Poiesis",
+  "version": "0.1.0",
+  "description": "Poiesis — seu segundo cérebro: assistente pessoal com IA, memória e automações.",
+  "private": true,
+  "main": "./out/main/index.js",
+  "author": "Carlos",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm test",
+    "dist:win": "electron-vite build && electron-builder --win"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "electron": "^44.7.0",
+    "electron-builder": "^26.15.3",
+    "electron-vite": "^5.0.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.7",
+    "vitest": "^3.2.7"
+  },
+  "build": {
+    "appId": "app.poiesis.desktop",
+    "productName": "Poiesis",
+    "directories": { "output": "dist" },
+    "files": ["out/**/*"],
+    "win": { "target": "nsis" },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true }
+  }
+}

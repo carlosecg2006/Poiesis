@@ -118,11 +118,13 @@ Unificador de contatos: as fichas são montadas a partir do que **você** import
 
 ---
 
-## 6. Stack técnica proposta **[DECIDIR]**
+## 6. Stack técnica (decidida)
 
-- **App desktop:** Tauri (núcleo em Rust, leve) + interface web (React/TypeScript ou Svelte). Roda em Windows, macOS, Linux; base para mobile depois.
-  - Alternativa mais simples para aprender: Electron + TypeScript (mais pesado, mais exemplos na internet).
-- **Motor de IA/agentes:** Python ou TypeScript como serviço local ("sidecar").
+- **App desktop:** Electron + React + TypeScript. Escolhido porque roda no Windows só com o Node.js
+  instalado (sem compilar Rust), tem acesso completo ao sistema para a Fase 3 e uma linguagem só
+  em tudo. Instalador `.exe` via electron-builder.
+- **Motor de IA/agentes:** TypeScript no processo principal; serviços em Python entram como
+  módulos separados quando fizerem sentido (ex.: transcrição de áudio).
 - **Integrações:** **MCP (Model Context Protocol)** — já existem servidores prontos para GitHub, Notion, Google, Spotify, sistema de arquivos etc. Cada conector = um módulo MCP. Isso é exatamente o "modular como Linux".
 - **Armazenamento:** cofre em Markdown (compatível com Obsidian) + SQLite + `sqlite-vec` para vetores.
 - **IA local:** Ollama. **IA nuvem:** Claude API (e outras, via roteador).
@@ -145,5 +147,20 @@ Escopo total é enorme; construímos em camadas, cada fase já útil sozinha.
 
 ---
 
-## 8. Perguntas em aberto
-Veja a seção de conversa — respostas a serem registradas aqui.
+## 8. Decisões registradas
+
+| Pergunta | Resposta |
+|---|---|
+| Plataforma inicial | Windows primeiro |
+| Quem programa | O Claude escreve o código; você programa e acompanha |
+| Hardware para IA local | Ainda não sabe → IA local é opcional (Ollama), o app funciona só com a nuvem |
+| IA na nuvem paga | Sim (Claude via API, cobrado por uso) |
+| Site de cartas | É seu e está em construção → integra na Fase 4, ou pode nascer dentro do Poiesis |
+
+## 9. Estado atual
+
+- [x] **Fase 0 — Fundação**: app desktop, núcleo (eventos, módulos, capacidades), cofre em Markdown,
+  editor com `[[links]]` e backlinks, captura rápida, busca, linha de comando (`Ctrl+K`),
+  atalho global, chat com Claude/Ollama com roteamento automático e conversas privadas.
+- [ ] **Fase 1 — Memória**: importação de pastas do Windows (sem alterar nada), busca por significado
+  (vetores), RAG com citações, visualização da teia, memória de preferências automática.
